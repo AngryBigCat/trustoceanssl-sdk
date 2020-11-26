@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":212:{a:2:{s:7:"defects";a:2:{s:18:"PingTest::testPing";i:3;s:38:"TrustOceanSSl\Tests\PingTest::testPing";i:4;}s:5:"times";a:2:{s:18:"PingTest::testPing";d:0.003;s:38:"TrustOceanSSl\Tests\PingTest::testPing";d:1.559;}}}
