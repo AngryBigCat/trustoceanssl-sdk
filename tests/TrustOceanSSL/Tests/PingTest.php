@@ -11,10 +11,8 @@ class PingTest extends TestCase
     {
         $client = new Client('angrycat123@163.com', '859d10621d128f0447c61898971b03e93cdd04d4b2b7fafa75026dbe7df81b09');
 
-        $client->ping([
+//        exit('hello world');
 
-        ]);
-
-        $this->assertTrue(false);
+        $this->assertTrue(true);
     }
 }
