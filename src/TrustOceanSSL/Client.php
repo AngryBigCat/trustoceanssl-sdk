@@ -17,7 +17,7 @@ class Client
 
     public function ping()
     {
-        $data = $this->post();
+//        $data = $this->post();
 
         return true;
     }
