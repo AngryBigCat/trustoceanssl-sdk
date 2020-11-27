@@ -1,9 +1,9 @@
 <?php
 
-namespace TrustOceanSSl\Tests;
+namespace TrustOceanSSL\Tests;
 
 use PHPUnit\Framework\TestCase;
-use TrustOceanSSl\Client;
+use TrustOceanSSL\Client;
 
 class PingTest extends TestCase
 {
@@ -11,8 +11,9 @@ class PingTest extends TestCase
     {
         $client = new Client('angrycat123@163.com', '859d10621d128f0447c61898971b03e93cdd04d4b2b7fafa75026dbe7df81b09');
 
+        $data = $client->ping();
 //        exit('hello world');
 
-        $this->assertTrue(true);
+        $this->assertTrue($data);
     }
 }

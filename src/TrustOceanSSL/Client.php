@@ -1,8 +1,8 @@
 <?php
 
-namespace TrustOceanSSl;
+namespace TrustOceanSSL;
 
-use TrustOceanSSl\Http\RequestCore;
+use TrustOceanSSL\Http\RequestCore;
 
 class Client
 {
@@ -18,6 +18,8 @@ class Client
     public function ping()
     {
         $data = $this->post();
+
+        return true;
     }
 
     public function getProfileInfo()
