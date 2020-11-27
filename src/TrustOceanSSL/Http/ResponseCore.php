@@ -1,6 +1,6 @@
 <?php
 
-namespace TrustOceanSSl\Http;
+namespace TrustOceanSSL\Http;
 
 /**
  * Container for all response-related methods.

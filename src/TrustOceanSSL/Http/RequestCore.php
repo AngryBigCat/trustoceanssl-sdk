@@ -1,5 +1,5 @@
 <?php
-namespace TrustOceanSSl\Http;
+namespace TrustOceanSSL\Http;
 
 /**
  * Handle all HTTP requests using cURL and manages the responses.

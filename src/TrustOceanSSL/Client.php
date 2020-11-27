@@ -1,8 +1,8 @@
 <?php
 
-namespace TrustOceanSSl;
+namespace TrustOceanSSL;
 
-use TrustOceanSSl\Http\RequestCore;
+use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
 use TrustOceanSSL\Result\AddSSLOrderResult;
