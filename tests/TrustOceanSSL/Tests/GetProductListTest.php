@@ -1,17 +1,21 @@
 <?php
 
-namespace TrustOceanSSl\Tests;
+
+namespace TrustOceanSSL\Tests;
+
 
 use PHPUnit\Framework\TestCase;
 use TrustOceanSSl\Client;
 
-class PingTest extends TestCase
+class GetProductListTest extends TestCase
 {
-    public function testPing()
+    public $products;
+
+    public function testGetProductList()
     {
         $client = new Client('angrycat123@163.com', '859d10621d128f0447c61898971b03e93cdd04d4b2b7fafa75026dbe7df81b09');
 
-        $data = $client->ping();
+        $data = $client->getProductList();
 
         $this->assertStringContainsString('success', $data->status);
     }

@@ -4,29 +4,42 @@
 namespace TrustOceanSSL\Model;
 
 
-class Product
+class Product extends Model
 {
-    private $pid;
+    public $pid;
 
-    private $name;
+    public $name;
 
-    private $chineseName;
+    public $chineseName;
 
-    private $class;
+    public $class;
 
-    private $multiDomain;
+    public $multiDomain;
 
-    private $wildcard;
+    public $wildcard;
 
-    private $ipv4;
+    public $ipv4;
 
-    private $brand;
+    public $brand;
 
-    private $seal;
+    public $seal;
 
-    private $score;
+    public $score;
 
-    private $periods;
+    /**
+     * @var array
+     */
+    public $periods;
 
-    private $pricing;
+    /**
+     * @var ProductPricing[]
+     */
+    public $pricing;
+
+    public function parsePricing($pricing)
+    {
+        foreach ($pricing as $key => $value) {
+            $this->pricing[$key] = new ProductPricing($value);
+        }
+    }
 }

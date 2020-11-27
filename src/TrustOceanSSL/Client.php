@@ -3,10 +3,19 @@
 namespace TrustOceanSSl;
 
 use TrustOceanSSl\Http\RequestCore;
+use TrustOceanSSL\Request\AddSSLOrderRequest;
+use TrustOceanSSL\Request\Request;
+use TrustOceanSSL\Result\AddSSLOrderResult;
+use TrustOceanSSL\Result\GetDomainValidationStatusResult;
+use TrustOceanSSL\Result\GetPreDomainValidationInformationResult;
+use TrustOceanSSL\Result\GetProductListResult;
+use TrustOceanSSL\Result\GetProfileInfoResult;
+use TrustOceanSSL\Result\PingResult;
 
 class Client
 {
     private $username;
+
     private $password;
 
     public function __construct(string $username,  string $password)
@@ -18,31 +27,45 @@ class Client
     public function ping()
     {
         $data = $this->post();
+
+        return new PingResult($data->body);
     }
 
     public function getProfileInfo()
     {
+        $data = $this->post();
 
+        return new GetProfileInfoResult($data->body);
     }
 
     public function getProductList()
     {
+        $data = $this->post();
 
+        return new GetProductListResult($data->body);
     }
 
     public function getPreDomainValidationInformation()
     {
+        $data = $this->post();
 
+        return new GetPreDomainValidationInformationResult($data);
     }
 
-    public function addSSLOrder()
+    public function addSSLOrder($params)
     {
+        $request = new AddSSLOrderRequest($params);
 
+        $data = $this->post($request);
+
+        return new AddSSLOrderResult($data);
     }
 
     public function getDomainValidationStatus()
     {
+        $data = $this->post();
 
+        return new GetDomainValidationStatusResult($data);
     }
 
     public function reTryDcvEmailOrDCVCheck()
@@ -105,7 +128,7 @@ class Client
     }
 
 
-    private function post($params = [])
+    private function post(Request $requestParam = null)
     {
         $request = new RequestCore();
 
@@ -115,11 +138,12 @@ class Client
 
         $request->set_method(RequestCore::HTTP_POST);
 
-        $params = array_merge($params, [
-            'username' => $this->username,
-            'password' => $this->password,
-        ]);
-        $request->set_body($params);
+        if (is_null($requestParam)) {
+            $requestParam = new Request();
+        }
+        $requestParam->username = $this->username;
+        $requestParam->password = $this->password;
+        $request->set_body($requestParam->toArray());
 
         $response = $request->send_request(true);
         if (strpos($response->header['content-type'], 'application/json') !== false) {

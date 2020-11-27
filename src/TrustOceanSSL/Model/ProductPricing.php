@@ -4,19 +4,19 @@
 namespace TrustOceanSSL\Model;
 
 
-class ProductPricing
+class ProductPricing extends Model
 {
-    private $monthly;
+    public $monthly;
 
-    private $quarterly;
+    public $quarterly;
 
-    private $annually;
+    public $annually;
 
-    private $biennially;
+    public $biennially;
 
-    private $triennially;
+    public $triennially;
 
-    private $quadrennial;
+    public $quadrennial;
 
-    private $quinquennial;
+    public $quinquennial;
 }
