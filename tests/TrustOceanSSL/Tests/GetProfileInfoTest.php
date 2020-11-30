@@ -5,7 +5,7 @@ namespace TrustOceanSSL\Tests;
 
 
 use PHPUnit\Framework\TestCase;
-use TrustOceanSSl\Client;
+use TrustOceanSSL\Client;
 
 class GetProfileInfoTest extends TestCase
 {

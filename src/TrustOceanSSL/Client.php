@@ -5,12 +5,14 @@ namespace TrustOceanSSL;
 use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
+use TrustOceanSSL\Request\ReTryDcvEmailOrDCVCheckRequest;
 use TrustOceanSSL\Result\AddSSLOrderResult;
 use TrustOceanSSL\Result\GetDomainValidationStatusResult;
 use TrustOceanSSL\Result\GetPreDomainValidationInformationResult;
 use TrustOceanSSL\Result\GetProductListResult;
 use TrustOceanSSL\Result\GetProfileInfoResult;
 use TrustOceanSSL\Result\PingResult;
+use TrustOceanSSL\Result\ReTryDcvEmailOrDCVCheckResult;
 
 class Client
 {
@@ -68,9 +70,13 @@ class Client
         return new GetDomainValidationStatusResult($data);
     }
 
-    public function reTryDcvEmailOrDCVCheck()
+    public function reTryDcvEmailOrDCVCheck($params)
     {
+        $request =new ReTryDcvEmailOrDCVCheckRequest($params);
 
+        $data = $this->post();
+
+        return new ReTryDcvEmailOrDCVCheckResult($data);
     }
 
     public function changeDCVMethod()

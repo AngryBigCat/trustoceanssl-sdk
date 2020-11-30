@@ -41,5 +41,4 @@ class DomainDcvInfo
     private $https_filecontent;
 
     private $email;
-
 }
