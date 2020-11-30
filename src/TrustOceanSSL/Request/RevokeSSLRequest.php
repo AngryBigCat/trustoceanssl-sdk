@@ -6,10 +6,12 @@ namespace TrustOceanSSL\Request;
 
 use TrustOceanSSL\Exception\RequestParamException;
 
-class GetDomainValidationStatusRequest extends Request
+class RevokeSSLRequest extends Request
 {
 
     public $trustocean_id;
+
+    public $revocationReason;
 
     protected function validate()
     {

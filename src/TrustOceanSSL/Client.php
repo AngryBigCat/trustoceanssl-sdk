@@ -4,10 +4,15 @@ namespace TrustOceanSSL;
 
 use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
+use TrustOceanSSL\Request\ChangeDCVMethodRequest;
 use TrustOceanSSL\Request\GetDomainValidationStatusRequest;
 use TrustOceanSSL\Request\GetPreDomainValidationInformationRequest;
+use TrustOceanSSL\Request\ReissueSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
 use TrustOceanSSL\Request\ReTryDcvEmailOrDCVCheckRequest;
+use TrustOceanSSL\Request\RevokeSSLRequest;
+use TrustOceanSSL\Request\TrustoceanIdAndDomainRequest;
+use TrustOceanSSL\Request\TrustoceanIdRequest;
 use TrustOceanSSL\Result\AddSSLOrderResult;
 use TrustOceanSSL\Result\GetDomainValidationStatusResult;
 use TrustOceanSSL\Result\GetPreDomainValidationInformationResult;
@@ -69,7 +74,7 @@ class Client
 
     public function getDomainValidationStatus($params)
     {
-        $request = new GetDomainValidationStatusRequest($params);
+        $request = new TrustoceanIdRequest($params);
 
         $data = $this->post($request);
 
@@ -78,65 +83,88 @@ class Client
 
     public function reTryDcvEmailOrDCVCheck($params)
     {
-        $request =new ReTryDcvEmailOrDCVCheckRequest($params);
+        $request = new TrustoceanIdRequest($params);
 
         $data = $this->post($request);
 
         return new ReTryDcvEmailOrDCVCheckResult($data->body);
     }
 
-    public function changeDCVMethod()
+    public function changeDCVMethod($params)
     {
+        $request = new ChangeDCVMethodRequest($params);
+
+        $data = $this->post($request);
 
     }
 
-    public function removeSanDomain()
+    public function removeSanDomain($params)
     {
+        $request = new TrustoceanIdAndDomainRequest($params);
+
+        $data = $this->post($request);
 
     }
 
-    public function getOrderStatus()
+    public function getOrderStatus($params)
     {
+        $request = new TrustoceanIdRequest($params);
+
+        $data = $this->post($request);
 
     }
 
-    public function getSSLDetails()
+    public function getSSLDetails($params)
     {
+        $request = new TrustoceanIdRequest($params);
+
+        $data = $this->post($request);
+    }
+
+    public function reissueSSLOrder($params)
+    {
+        $request = new ReissueSSLOrderRequest($params);
+
+        $data = $this->post($request);
+    }
+
+    public function revokeSSL($params)
+    {
+        $request = new RevokeSSLRequest($params);
+
+        $data = $this->post($request);
 
     }
 
-    public function reissueSSLOrder()
+    public function cancelAndRefund($params)
     {
+        $request = new TrustoceanIdRequest($params);
 
+        $data = $this->post($request);
     }
 
-    public function revokeSSL()
+    public function checkRefundStatus($params)
     {
+        $request = new TrustoceanIdRequest($params);
 
+        $data = $this->post($request);
     }
 
-    public function cancelAndRefund()
+    public function checkUniqueId($params)
     {
+        $request = new TrustoceanIdRequest($params);
 
+        $data = $this->post($request);
     }
 
-    public function checkRefundStatus()
-    {
-
-    }
-
-    public function checkUniqueId()
-    {
-
-    }
     public function getProductPriceList()
     {
-
+        //无
     }
 
     public function getProductListWithPricing()
     {
-
+        //无
     }
 
 
