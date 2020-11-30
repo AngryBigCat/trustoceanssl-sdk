@@ -4,6 +4,8 @@ namespace TrustOceanSSL;
 
 use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
+use TrustOceanSSL\Request\GetDomainValidationStatusRequest;
+use TrustOceanSSL\Request\GetPreDomainValidationInformationRequest;
 use TrustOceanSSL\Request\Request;
 use TrustOceanSSL\Request\ReTryDcvEmailOrDCVCheckRequest;
 use TrustOceanSSL\Result\AddSSLOrderResult;
@@ -47,11 +49,13 @@ class Client
         return new GetProductListResult($data->body);
     }
 
-    public function getPreDomainValidationInformation()
+    public function getPreDomainValidationInformation($params)
     {
-        $data = $this->post();
+        $request = new GetPreDomainValidationInformationRequest($params);
 
-        return new GetPreDomainValidationInformationResult($data);
+        $data = $this->post($request);
+
+        return new GetPreDomainValidationInformationResult($data->body);
     }
 
     public function addSSLOrder($params)
@@ -60,23 +64,25 @@ class Client
 
         $data = $this->post($request);
 
-        return new AddSSLOrderResult($data);
+        return new AddSSLOrderResult($data->body);
     }
 
-    public function getDomainValidationStatus()
+    public function getDomainValidationStatus($params)
     {
-        $data = $this->post();
+        $request = new GetDomainValidationStatusRequest($params);
 
-        return new GetDomainValidationStatusResult($data);
+        $data = $this->post($request);
+
+        return new GetDomainValidationStatusResult($data->body);
     }
 
     public function reTryDcvEmailOrDCVCheck($params)
     {
         $request =new ReTryDcvEmailOrDCVCheckRequest($params);
 
-        $data = $this->post();
+        $data = $this->post($request);
 
-        return new ReTryDcvEmailOrDCVCheckResult($data);
+        return new ReTryDcvEmailOrDCVCheckResult($data->body);
     }
 
     public function changeDCVMethod()

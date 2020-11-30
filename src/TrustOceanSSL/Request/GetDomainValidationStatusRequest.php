@@ -1,13 +1,14 @@
 <?php
 
 
-namespace TrustOceanSSL\Result;
+namespace TrustOceanSSL\Request;
 
 
 use TrustOceanSSL\Exception\RequestParamException;
 
-class GetDomainValidationStatusResult extends Result
+class GetDomainValidationStatusRequest extends Request
 {
+
     public $trustocean_id;
 
     protected function validate()

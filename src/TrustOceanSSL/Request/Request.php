@@ -16,9 +16,9 @@ class Request
 
     public function __construct($params = [])
     {
-        $this->validate();
-
         $this->fill($params);
+
+        $this->validate();
     }
 
     protected function validate()
