@@ -3,6 +3,7 @@
 
 namespace TrustOceanSSL\Result;
 
-class ChangeDCVMethodResult extends Result {
+class ChangeDCVMethodResult extends Result
+{
 
 }

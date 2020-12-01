@@ -3,6 +3,7 @@
 
 namespace TrustOceanSSL\Result;
 
-class CheckUniqueIdResult extends Result {
+class CheckUniqueIdResult extends Result
+{
 
 }

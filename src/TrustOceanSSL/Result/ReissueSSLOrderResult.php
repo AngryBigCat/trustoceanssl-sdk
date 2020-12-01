@@ -3,7 +3,8 @@
 
 namespace TrustOceanSSL\Result;
 
-class ReissueSSLOrderResult extends Result {
+class ReissueSSLOrderResult extends Result
+{
 
     public $vendor_id;
 

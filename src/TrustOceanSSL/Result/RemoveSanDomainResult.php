@@ -3,6 +3,7 @@
 
 namespace TrustOceanSSL\Result;
 
-class RemoveSanDomainResult extends Result {
+class RemoveSanDomainResult extends Result
+{
 
 }

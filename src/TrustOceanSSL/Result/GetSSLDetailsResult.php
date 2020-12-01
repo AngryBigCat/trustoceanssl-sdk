@@ -3,7 +3,8 @@
 
 namespace TrustOceanSSL\Result;
 
-class GetSSLDetailsResult extends Result {
+class GetSSLDetailsResult extends Result
+{
 
     public $vendor_id;
 

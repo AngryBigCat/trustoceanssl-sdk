@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\RequestParamException;
+use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class TrustoceanIdAndDomainRequest extends Request
 {

@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\RequestParamException;
+use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class GetPreDomainValidationInformationRequest extends Request
 {
@@ -17,7 +17,7 @@ class GetPreDomainValidationInformationRequest extends Request
     protected function validate()
     {
         if (empty($this->domains)) {
-            throw new RequestParamException('domians 参数错误');
+            throw new TrustOceanRequestException('domians 参数错误');
         }
     }
 }

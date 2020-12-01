@@ -3,6 +3,7 @@
 
 namespace TrustOceanSSL\Result;
 
-class ReTryDcvEmailOrDCVCheckResult extends Result {
+class ReTryDcvEmailOrDCVCheckResult extends Result
+{
 
 }

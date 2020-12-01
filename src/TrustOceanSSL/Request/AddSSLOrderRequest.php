@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\RequestParamException;
+use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class AddSSLOrderRequest extends Request
 {
@@ -55,7 +55,7 @@ class AddSSLOrderRequest extends Request
     protected function validate()
     {
         if (!$this->pid || !is_numeric($this->pid)) {
-            throw new RequestParamException('pid参数出错或不存在');
+            throw new TrustOceanRequestException('pid参数出错或不存在');
         }
     }
 }

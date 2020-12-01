@@ -3,7 +3,8 @@
 
 namespace TrustOceanSSL\Result;
 
-class GetProductPriceListResult extends Result {
+class GetProductPriceListResult extends Result
+{
 
     public $products;
 

@@ -3,6 +3,7 @@
 
 namespace TrustOceanSSL\Result;
 
-class RevokeSSLResult extends Result {
+class RevokeSSLResult extends Result
+{
 
 }

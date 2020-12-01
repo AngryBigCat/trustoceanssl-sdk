@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\RequestParamException;
+use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class CheckUniqueIdRequest extends Request
 {
@@ -14,7 +14,7 @@ class CheckUniqueIdRequest extends Request
     protected function validate()
     {
         if (!$this->unique_id ) {
-            throw new RequestParamException('unique_id参数出错或不存在');
+            throw new TrustOceanRequestException('unique_id参数出错或不存在');
         }
     }
 }

@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\RequestParamException;
+use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class ChangeDCVMethodRequest extends Request
 {
@@ -19,7 +19,7 @@ class ChangeDCVMethodRequest extends Request
     protected function validate()
     {
         if (!$this->trustocean_id || !is_numeric($this->trustocean_id)) {
-            throw new RequestParamException('trustocean_id参数出错或不存在');
+            throw new TrustOceanRequestException('trustocean_id参数出错或不存在');
         }
     }
 }
