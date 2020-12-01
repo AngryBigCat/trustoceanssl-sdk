@@ -11,15 +11,13 @@ class ReissueSSLOrderRequest extends Request
 
     public $trustocean_id;
 
-    public $domain;
+    public $domains;
 
-    public $method;
+    public $dcv_method;
 
     public $csr_code;
 
     public $contact_email;
-
-    public $dcv_method;
 
     public $unique_id;
 

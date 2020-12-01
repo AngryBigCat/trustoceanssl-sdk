@@ -5,20 +5,23 @@ namespace TrustOceanSSL;
 use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
 use TrustOceanSSL\Request\ChangeDCVMethodRequest;
-use TrustOceanSSL\Request\GetDomainValidationStatusRequest;
 use TrustOceanSSL\Request\GetPreDomainValidationInformationRequest;
 use TrustOceanSSL\Request\ReissueSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
-use TrustOceanSSL\Request\ReTryDcvEmailOrDCVCheckRequest;
 use TrustOceanSSL\Request\RevokeSSLRequest;
 use TrustOceanSSL\Request\TrustoceanIdAndDomainRequest;
 use TrustOceanSSL\Request\TrustoceanIdRequest;
 use TrustOceanSSL\Result\AddSSLOrderResult;
+use TrustOceanSSL\Result\ChangeDCVMethodResult;
 use TrustOceanSSL\Result\GetDomainValidationStatusResult;
+use TrustOceanSSL\Result\GetOrderStatusResult;
 use TrustOceanSSL\Result\GetPreDomainValidationInformationResult;
 use TrustOceanSSL\Result\GetProductListResult;
 use TrustOceanSSL\Result\GetProfileInfoResult;
+use TrustOceanSSL\Result\GetSSLDetailsResult;
 use TrustOceanSSL\Result\PingResult;
+use TrustOceanSSL\Result\ReissueSSLOrderResult;
+use TrustOceanSSL\Result\RemoveSanDomainResult;
 use TrustOceanSSL\Result\ReTryDcvEmailOrDCVCheckResult;
 
 class Client
@@ -96,6 +99,8 @@ class Client
 
         $data = $this->post($request);
 
+        return new ChangeDCVMethodResult($data->body);
+
     }
 
     public function removeSanDomain($params)
@@ -103,6 +108,8 @@ class Client
         $request = new TrustoceanIdAndDomainRequest($params);
 
         $data = $this->post($request);
+
+        return new RemoveSanDomainResult($data->body);
 
     }
 
@@ -112,6 +119,8 @@ class Client
 
         $data = $this->post($request);
 
+        return new GetOrderStatusResult($data->body);
+
     }
 
     public function getSSLDetails($params)
@@ -119,6 +128,8 @@ class Client
         $request = new TrustoceanIdRequest($params);
 
         $data = $this->post($request);
+
+        return new GetSSLDetailsResult($data->body);
     }
 
     public function reissueSSLOrder($params)
@@ -126,6 +137,8 @@ class Client
         $request = new ReissueSSLOrderRequest($params);
 
         $data = $this->post($request);
+
+        return new ReissueSSLOrderResult($data->body);
     }
 
     public function revokeSSL($params)
