@@ -6,6 +6,7 @@ use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
 use TrustOceanSSL\Request\ChangeDCVMethodRequest;
 use TrustOceanSSL\Request\CheckUniqueIdRequest;
+use TrustOceanSSL\Request\GetDomainValidationStatusRequest;
 use TrustOceanSSL\Request\GetPreDomainValidationInformationRequest;
 use TrustOceanSSL\Request\ReissueSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
