@@ -5,6 +5,7 @@ namespace TrustOceanSSL;
 use TrustOceanSSL\Http\RequestCore;
 use TrustOceanSSL\Request\AddSSLOrderRequest;
 use TrustOceanSSL\Request\ChangeDCVMethodRequest;
+use TrustOceanSSL\Request\CheckUniqueIdRequest;
 use TrustOceanSSL\Request\GetPreDomainValidationInformationRequest;
 use TrustOceanSSL\Request\ReissueSSLOrderRequest;
 use TrustOceanSSL\Request\Request;
@@ -12,17 +13,23 @@ use TrustOceanSSL\Request\RevokeSSLRequest;
 use TrustOceanSSL\Request\TrustoceanIdAndDomainRequest;
 use TrustOceanSSL\Request\TrustoceanIdRequest;
 use TrustOceanSSL\Result\AddSSLOrderResult;
+use TrustOceanSSL\Result\CancelAndRefundResult;
 use TrustOceanSSL\Result\ChangeDCVMethodResult;
+use TrustOceanSSL\Result\CheckRefundStatusResult;
+use TrustOceanSSL\Result\CheckUniqueIdResult;
 use TrustOceanSSL\Result\GetDomainValidationStatusResult;
 use TrustOceanSSL\Result\GetOrderStatusResult;
 use TrustOceanSSL\Result\GetPreDomainValidationInformationResult;
 use TrustOceanSSL\Result\GetProductListResult;
+use TrustOceanSSL\Result\GetProductListWithPricingResult;
+use TrustOceanSSL\Result\GetProductPriceListResult;
 use TrustOceanSSL\Result\GetProfileInfoResult;
 use TrustOceanSSL\Result\GetSSLDetailsResult;
 use TrustOceanSSL\Result\PingResult;
 use TrustOceanSSL\Result\ReissueSSLOrderResult;
 use TrustOceanSSL\Result\RemoveSanDomainResult;
 use TrustOceanSSL\Result\ReTryDcvEmailOrDCVCheckResult;
+use TrustOceanSSL\Result\RevokeSSLResult;
 
 class Client
 {
@@ -147,6 +154,8 @@ class Client
 
         $data = $this->post($request);
 
+        return new RevokeSSLResult($data->body);
+
     }
 
     public function cancelAndRefund($params)
@@ -154,6 +163,8 @@ class Client
         $request = new TrustoceanIdRequest($params);
 
         $data = $this->post($request);
+
+        return new CancelAndRefundResult($data->body);
     }
 
     public function checkRefundStatus($params)
@@ -161,23 +172,31 @@ class Client
         $request = new TrustoceanIdRequest($params);
 
         $data = $this->post($request);
+
+        return new CheckRefundStatusResult($data->body);
     }
 
     public function checkUniqueId($params)
     {
-        $request = new TrustoceanIdRequest($params);
+        $request = new CheckUniqueIdRequest($params);
 
         $data = $this->post($request);
+
+        return new CheckUniqueIdResult($data->body);
     }
 
     public function getProductPriceList()
     {
-        //无
+        $data = $this->post();
+
+        return new  GetProductPriceListResult($data->body);
     }
 
     public function getProductListWithPricing()
     {
-        //无
+        $data = $this->post();
+
+        return new GetProductListWithPricingResult($data->body);
     }
 
 

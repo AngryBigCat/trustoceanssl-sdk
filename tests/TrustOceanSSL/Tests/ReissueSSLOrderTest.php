@@ -43,7 +43,7 @@ oVSzfI+5yPg+18jyESwO4bVZ5WpJF436zKgY740o
 
         $data = $client->reissueSSLOrder($params);
 
-       var_dump($data);die();
+//       var_dump($data);die();
         $this->assertStringContainsString('success', $data->status);
     }
 }

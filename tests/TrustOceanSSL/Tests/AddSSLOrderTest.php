@@ -35,7 +35,7 @@ m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 -----END CERTIFICATE REQUEST-----
 ',
           'period'=>'Annually',
-          'unique_id'=>'un32ms0216',
+          'unique_id'=>'un32ms0902',
           'dcv_method'=>'https',
           'contact_email'=>'1342479179@qq.com',
           'callback'=>'https://xays.top',
@@ -56,7 +56,7 @@ m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 //          'contact_phone'=>'schema type not provided'
             ];
         $data = $client->addSSLOrder($params);
-//        var_dump($data);die();
+        var_dump($data);die();
 
         $this->assertStringContainsString('success', $data->status);
     }
