@@ -3,7 +3,8 @@
 
 namespace TrustOceanSSL\Result;
 
-class CheckRefundStatusResult extends Result {
+class CheckRefundStatusResult extends Result
+{
 
     public $refund_at;
 

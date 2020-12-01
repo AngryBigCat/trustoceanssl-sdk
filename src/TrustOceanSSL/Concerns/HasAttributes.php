@@ -6,7 +6,7 @@ namespace TrustOceanSSL\Concerns;
 
 trait HasAttributes
 {
-    public function fill($attributes)
+    protected function fill($attributes)
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
@@ -14,7 +14,7 @@ trait HasAttributes
     }
 
 
-    public function fillParse($attributes)
+    protected function fillParse($attributes)
     {
         foreach ($attributes as $key => $value) {
             $method_name = "parse" . ucfirst($key);
@@ -24,7 +24,7 @@ trait HasAttributes
         }
     }
 
-    public function setAttribute($key, $value)
+    protected function setAttribute($key, $value)
     {
         $this->$key = $value;
     }
