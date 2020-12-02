@@ -4,11 +4,13 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
 class RemoveSanDomainRequest extends Request
 {
-    public $trustocean_id;
-
-    public $domain;
+    protected function rules()
+    {
+        return [
+            'trustocean_id' => 'required|integer',
+            'domain' => 'required|domain',
+        ];
+    }
 }

@@ -12,19 +12,19 @@ use TrustOceanSSL\Request\Request;
  * @method \TrustOceanSSL\Result\PingResult                                 ping()
  * @method \TrustOceanSSL\Result\GetProfileInfoResult                       getProfileInfo()
  * @method \TrustOceanSSL\Result\GetProductListResult                       getProductList()
- * @method \TrustOceanSSL\Result\GetPreDomainValidationInformationResult    getPreDomainValidationInformation(array $params)
- * @method \TrustOceanSSL\Result\AddSSLOrderResult                          addSSLOrder(array $params)
- * @method \TrustOceanSSL\Result\GetDomainValidationStatusResult            getDomainValidationStatus(array $params)
- * @method \TrustOceanSSL\Result\ReTryDcvEmailOrDCVCheckResult              reTryDcvEmailOrDCVCheck(array $params)
- * @method \TrustOceanSSL\Result\ChangeDCVMethodResult                      changeDCVMethod(array $params)
- * @method \TrustOceanSSL\Result\RemoveSanDomainResult                      removeSanDomain(array $params)
- * @method \TrustOceanSSL\Result\GetOrderStatusResult                       getOrderStatus(array $params)
- * @method \TrustOceanSSL\Result\GetSSLDetailsResult                        getSSLDetails(array $params)
- * @method \TrustOceanSSL\Result\ReissueSSLOrderResult                      reissueSSLOrder(array $params)
- * @method \TrustOceanSSL\Result\RevokeSSLResult                            revokeSSL(array $params)
- * @method \TrustOceanSSL\Result\CancelAndRefundResult                      cancelAndRefund(array $params)
- * @method \TrustOceanSSL\Result\CheckRefundStatusResult                    checkRefundStatus(array $params)
- * @method \TrustOceanSSL\Result\CheckUniqueIdResult                        checkUniqueId(array $params)
+ * @method \TrustOceanSSL\Result\GetPreDomainValidationInformationResult    getPreDomainValidationInformation(array|Request $params)
+ * @method \TrustOceanSSL\Result\AddSSLOrderResult                          addSSLOrder(array|Request $params)
+ * @method \TrustOceanSSL\Result\GetDomainValidationStatusResult            getDomainValidationStatus(array|Request $params)
+ * @method \TrustOceanSSL\Result\ReTryDcvEmailOrDCVCheckResult              reTryDcvEmailOrDCVCheck(array|Request $params)
+ * @method \TrustOceanSSL\Result\ChangeDCVMethodResult                      changeDCVMethod(array|Request $params)
+ * @method \TrustOceanSSL\Result\RemoveSanDomainResult                      removeSanDomain(array|Request $params)
+ * @method \TrustOceanSSL\Result\GetOrderStatusResult                       getOrderStatus(array|Request $params)
+ * @method \TrustOceanSSL\Result\GetSSLDetailsResult                        getSSLDetails(array|Request $params)
+ * @method \TrustOceanSSL\Result\ReissueSSLOrderResult                      reissueSSLOrder(array|Request $params)
+ * @method \TrustOceanSSL\Result\RevokeSSLResult                            revokeSSL(array|Request $params)
+ * @method \TrustOceanSSL\Result\CancelAndRefundResult                      cancelAndRefund(array|Request $params)
+ * @method \TrustOceanSSL\Result\CheckRefundStatusResult                    checkRefundStatus(array|Request $params)
+ * @method \TrustOceanSSL\Result\CheckUniqueIdResult                        checkUniqueId(array|Request $params)
  * @method \TrustOceanSSL\Result\GetProductPriceListResult                  getProductPriceList()
  * @method \TrustOceanSSL\Result\GetProductListWithPricingResult            getProductListWithPricing()
  */
@@ -47,16 +47,30 @@ class Client
             throw new TrustOceanException('您请求的接口名：'. $name .' 不存在');
         }
 
+        list($params) = $arguments;
+
+        if (is_object($params) && ($params instanceof Request)) {
+            $data = $this->post($name, $params);
+        } else if (is_array($params)) {
+            $data = $this->arrayPost($name, $params);
+        } else {
+            throw new TrustOceanException('您传入的参数不正确');
+        }
+
+        return new $resultClassName($data->body);
+    }
+
+    private function arrayPost($name, array $requestParam = [])
+    {
         $requestClassName = "TrustOceanSSL\\Request\\".ucfirst($name)."Request";
         if (class_exists($requestClassName)) {
-            list($params) = $arguments;
-            $request = new $requestClassName($params);
+            $request = new $requestClassName($requestParam);
             $data = $this->post($name, $request);
         } else {
             $data = $this->post($name);
         }
 
-        return new $resultClassName($data->body);
+        return $data;
     }
 
 
@@ -66,8 +80,8 @@ class Client
         if (is_null($requestParam)) {
             $requestParam = new Request();
         }
-        $requestParam->username = $this->username;
-        $requestParam->password = $this->password;
+        $requestParam->setUsername($this->username);
+        $requestParam->setPassword($this->password);
 
         // 发送Http请求
         $request = new RequestCore();

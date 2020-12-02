@@ -4,20 +4,14 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
 class GetPreDomainValidationInformationRequest extends Request
 {
-    public $domains;
-
-    public $csr_code;
-
-    public $unique_id;
-
-    protected function validate()
+    protected function rules()
     {
-        if (empty($this->domains)) {
-            throw new TrustOceanRequestException('domians 参数错误');
-        }
+        return [
+            'domains' => 'required|integer',
+            'csr_code' => 'required|checkCsrCode',
+            'unique_id' => 'required|checkUniqueId',
+        ];
     }
 }

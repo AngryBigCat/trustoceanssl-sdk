@@ -4,7 +4,7 @@
 namespace TrustOceanSSL\Result;
 
 
-use TrustOceanSSL\Concerns\HasAttributes;
+use TrustOceanSSL\Model\Concerns\HasAttributes;
 
 class Result
 {

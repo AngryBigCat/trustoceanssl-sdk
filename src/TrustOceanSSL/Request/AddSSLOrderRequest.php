@@ -4,58 +4,33 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
 class AddSSLOrderRequest extends Request
 {
-    public $pid;
-
-    public $csr_code;
-
-    public $period;
-
-    public $dcv_method;
-
-    public $unique_id;
-
-    public $contact_email;
-
-    public $callback;
-
-    public $domains;
-
-    public $renew;
-
-    public $organization_name;
-
-    public $organizationalUnitName;
-
-    public $registered_address_line1;
-
-    public $registered_no;
-
-    public $country;
-
-    public $state;
-
-    public $city;
-
-    public $postal_code;
-
-    public $organization_phone;
-
-    public $date_of_incorporation;
-
-    public $contact_name;
-
-    public $contact_title;
-
-    public $contact_phone;
-
-    protected function validate()
+    protected function rules()
     {
-        if (!$this->pid || !is_numeric($this->pid)) {
-            throw new TrustOceanRequestException('pid参数出错或不存在');
-        }
+        return [
+            'pid'                       => 'required|integer',
+            'csr_code'                  => 'required|checkCsrCode',
+            'period'                    => 'required|in:Annu',
+            'dcv_method'                => 'required|checkDcvMethod',
+            'unique_id'                 => 'required|checkUniqueId',
+            'contact_email'             => 'required|email',
+            'callback'                  => 'required|url',
+            'domains'                   => 'required|domains',
+            'renew'                     => 'required|in:yes,no',
+            'organization_name'         => 'string',
+            'organizationalUnitName'    => 'string',
+            'registered_address_line1'  => 'string',
+            'registered_no'             => 'string',
+            'country'                   => 'string',
+            'state'                     => 'string',
+            'city'                      => 'string',
+            'postal_code'               => 'string',
+            'organization_phone'        => 'string',
+            'date_of_incorporation'     => 'string',
+            'contact_name'              => 'string',
+            'contact_title'             => 'string',
+            'contact_phone'             => 'string',
+        ];
     }
 }

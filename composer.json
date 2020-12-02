@@ -11,7 +11,9 @@
     "require": {
         "php": "^7.1",
         "ext-json": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "jeremykendall/php-domain-parser": "5.x-dev",
+        "egulias/email-validator": "2.1.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5"

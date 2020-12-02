@@ -4,11 +4,12 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
 class GetOrderStatusRequest extends Request
 {
-
-    public $trustocean_id;
-
+    protected function rules()
+    {
+        return [
+            'trustocean_id' => 'required|integer',
+        ];
+    }
 }

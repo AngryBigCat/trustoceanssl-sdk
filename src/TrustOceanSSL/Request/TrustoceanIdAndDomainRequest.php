@@ -8,9 +8,11 @@ use TrustOceanSSL\Exception\TrustOceanRequestException;
 
 class TrustoceanIdAndDomainRequest extends Request
 {
-
-    public $trustocean_id;
-
-    public $domain;
-
+    protected function rules()
+    {
+        return [
+            'trustocean_id' => 'required|integer',
+            'domain' => 'required|domain',
+        ];
+    }
 }

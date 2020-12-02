@@ -1,7 +1,7 @@
 <?php
 
 
-namespace TrustOceanSSL\Concerns;
+namespace TrustOceanSSL\Model\Concerns;
 
 
 trait HasAttributes

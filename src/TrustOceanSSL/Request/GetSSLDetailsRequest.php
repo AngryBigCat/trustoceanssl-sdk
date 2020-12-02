@@ -4,11 +4,12 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
 class GetSSLDetailsRequest extends Request
 {
-
-    public $trustocean_id;
-
+    protected function rules()
+    {
+        return [
+            'trustocean_id' => 'required|integer',
+        ];
+    }
 }
