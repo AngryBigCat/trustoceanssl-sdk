@@ -4,17 +4,10 @@
 namespace TrustOceanSSL\Tests;
 
 
-use PHPUnit\Framework\TestCase;
-use TrustOceanSSL\Client;
-
 class AddSSLOrderTest extends TestCase
 {
-    public $products;
-
     public function testAddSSLOrderTest()
     {
-        $client = new Client('angrycat123@163.com', '04cdd0305d62200abaae047f88c2d45f804f05b03ee2dc2b4914c0f38ef0bcb0');
-
         $params = [
             'pid' => 50,
             'csr_code'=>'-----BEGIN CERTIFICATE REQUEST-----
@@ -55,8 +48,7 @@ m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 //          'contact_title'=>'<string>',
 //          'contact_phone'=>'schema type not provided'
             ];
-        $data = $client->addSSLOrder($params);
-        var_dump($data);die();
+        $data = $this->client->addSSLOrder($params);
 
         $this->assertStringContainsString('success', $data->status);
     }

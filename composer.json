@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": "^7.1",
         "ext-json": "*",
         "ext-curl": "*"
     },
@@ -17,12 +17,14 @@
         "phpunit/phpunit": "^8.5"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ],
         "psr-4": {
-            "TrustOceanSSL\\": "src/TrustOceanSSL"
+            "TrustOceanSSL\\": "src/TrustOceanSSL/"
         }
     },
-    "minimum-stability": "stable"
+    "autoload-dev": {
+        "psr-4": {
+            "TrustOceanSSL\\Tests\\": "tests/TrustOceanSSL/Tests/"
+        }
+    },
+    "minimum-stability": "dev"
 }
