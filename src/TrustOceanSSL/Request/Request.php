@@ -23,6 +23,6 @@ class Request
 
     protected function validate()
     {
-        return true;
+
     }
 }
