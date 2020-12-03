@@ -47,14 +47,10 @@ class Client
             throw new TrustOceanException('您请求的接口名：'. $name .' 不存在');
         }
 
-        list($params) = $arguments;
-
-        if (is_object($params) && ($params instanceof Request)) {
-            $data = $this->post($name, $params);
-        } else if (is_array($params)) {
-            $data = $this->arrayPost($name, $params);
+        if (empty($arguments)) {
+            $data = $this->arrayPost($name);
         } else {
-            throw new TrustOceanException('您传入的参数不正确');
+            $data = $this->arrayPost($name, $arguments[0]);
         }
 
         return new $resultClassName($data->body);
