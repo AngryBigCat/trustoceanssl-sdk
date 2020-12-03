@@ -44,6 +44,13 @@ class Request
             'required' => '您输入的 :attribute 字段值必须存在',
             'integer' => '您输入的 :attribute 字段值必须为int类型',
             'checkCsrCode' => '您输入的 :attribute 字段值格式不正确',
+            'in' => '您输入的 :attribute 不在可输入值的范围内 ',
+            'url' => '您输入的 :attribute HTTPS URL格式不正确',
+            'domains' => '您输入的 :attribute 域名组格式不正确',
+            'domain' => '您输入的 :attribute 域名格式不正确',
+            'email' => '您输入的 :attribute Email地址不正确',
+            'string' => '您输入的 :attribute 必须为字符串类型',
+            'checkDcvMethod' => '您输入的 :attribute 域名验证方式格式不正确',
         ];
     }
 
