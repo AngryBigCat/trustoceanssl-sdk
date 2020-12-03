@@ -113,7 +113,7 @@ class Validator
         } else {
             $msg = str_replace(':attribute', $attribute, $this->customMessages[$rule]);
             foreach ($params as $key => $param) {
-                $msg = str_replace(':param' . $key, $param, $msg);
+                $msg = str_replace(":param{$key}", $param, $msg);
             }
 
             $this->messages[] = $msg;

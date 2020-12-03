@@ -11,7 +11,7 @@ class GetPreDomainValidationInformationRequest extends Request
         return [
             'domains' => 'required|domains',
             'csr_code' => 'required|checkCsrCode',
-            'unique_id' => 'required|string',
+            'unique_id' => 'required|string|between:8,15',
         ];
     }
 }

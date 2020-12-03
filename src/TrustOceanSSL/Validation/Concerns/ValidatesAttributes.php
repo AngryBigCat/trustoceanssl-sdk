@@ -93,9 +93,24 @@ trait ValidatesAttributes
         return true;
     }
 
+    protected function validateNoRepeat($attribute, $value)
+    {
+        $domains = explode(',', $value);
+        if (count($domains) !== count(array_unique($domains))) {
+            return false;
+        }
+
+        return true;
+    }
+
     protected function validateDomain($attribute, $domain)
     {
         $domain = new Domain($domain);
+
+        // 检查是否为IDN域名
+        if ($domain->toAscii()->getContent() !== $domain->getContent()) {
+            return false;
+        }
 
         return $domain->isResolvable();
     }
@@ -125,7 +140,7 @@ trait ValidatesAttributes
         return true;
     }
 
-    protected function validateCheckDomainsDcvMethod($attribute, $value, $params)
+    protected function validateCheckEqualLength($attribute, $value, $params)
     {
         if (!isset($params[0])) {
             return false;
@@ -142,6 +157,12 @@ trait ValidatesAttributes
             return false;
         }
 
+        foreach ($dcvMethods as $key => $method) {
+            if (filter_var($domains[0], FILTER_VALIDATE_IP | FILTER_FLAG_IPV4) && !in_array($method, ['http', 'https'])) { // IP类型域名，只能使用http、https验证方式
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -155,6 +176,37 @@ trait ValidatesAttributes
             return strlen($value) <= $params[0];
         } else if (is_array($value)) {
             return count($value) <= $params[0];
+        }
+
+        return true;
+    }
+
+    protected function validateMin($attribute, $value, $params)
+    {
+        if (!isset($params[0])) {
+            return false;
+        }
+
+        if (is_string($value)) {
+            return strlen($value) >= $params[0];
+        } else if (is_array($value)) {
+            return count($value) >= $params[0];
+        }
+
+        return true;
+    }
+
+
+    protected function validateBetween($attribute, $value, $params)
+    {
+        if (!isset($params[0]) || !isset($params[1])) {
+            return false;
+        }
+
+        if (is_string($value)) {
+            return strlen($value) >= $params[0] && strlen($value) <= $params[1];
+        } else if (is_array($value)) {
+            return count($value) >= $params[0] && count($value) <= $params[1];
         }
 
         return true;

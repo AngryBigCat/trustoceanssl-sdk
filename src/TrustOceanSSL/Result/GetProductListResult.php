@@ -9,18 +9,17 @@ use TrustOceanSSL\Model\Product;
 
 class GetProductListResult extends Result
 {
-    /**
-     * @var Product[];
-     */
     public $products;
 
-    protected function parseProducts()
+    /**
+     * @return Product[]
+     */
+    public function getProducts()
     {
         $products = [];
         foreach ($this->products as $product) {
             $products[] = new Product($product);
         }
-
-        $this->products = $products;
+        return $products;
     }
 }

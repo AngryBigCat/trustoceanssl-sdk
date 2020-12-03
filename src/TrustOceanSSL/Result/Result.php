@@ -4,6 +4,7 @@
 namespace TrustOceanSSL\Result;
 
 
+use TrustOceanSSL\Exception\TrustOceanResultException;
 use TrustOceanSSL\Model\Concerns\HasAttributes;
 
 class Result
@@ -20,6 +21,14 @@ class Result
     {
         $this->fill($attributes);
 
-        $this->fillParse($attributes);
+        $this->validate();
+    }
+
+    public function validate()
+    {
+//        暂时注释，用户自行处理接口错误
+//        if ($this->status !== 'success') {
+//            throw new TrustOceanResultException($this->message);
+//        }
     }
 }

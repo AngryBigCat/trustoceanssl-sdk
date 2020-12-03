@@ -13,17 +13,6 @@ trait HasAttributes
         }
     }
 
-
-    protected function fillParse($attributes)
-    {
-        foreach ($attributes as $key => $value) {
-            $method_name = "parse" . ucfirst($key);
-            if (method_exists($this, $method_name)) {
-                call_user_func([$this, $method_name]);
-            }
-        }
-    }
-
     protected function setAttribute($key, $value)
     {
         $this->$key = $value;
