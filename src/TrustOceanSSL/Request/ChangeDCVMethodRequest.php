@@ -13,7 +13,7 @@ class ChangeDCVMethodRequest extends Request
         return [
             'trustocean_id' => 'required|integer',
             'domain' => 'required|domain',
-            'method' => 'required|',
+            'method' => 'required|checkDcvMethod',
         ];
     }
 }
