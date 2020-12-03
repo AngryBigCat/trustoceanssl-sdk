@@ -30,11 +30,11 @@ m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 -----END CERTIFICATE REQUEST-----
 ',
           'period'=>'Annually',
-          'unique_id'=>'un32ms0902',
-          'dcv_method'=>'https',
+          'unique_id'=>'un32ms0911',
+          'dcv_method'=>'dns',
           'contact_email'=>'1342479179@qq.com',
           'callback'=>'https://xays.top',
-          'domains'=> 'www.xays.top',
+          'domains'=> 'xays.top',
           'renew'=>'yes',
 //          'organization_name'=>'',
 //          'organizationalUnitName'=>'<string>',
@@ -79,6 +79,8 @@ m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 //        $params->renew = 'no';
 
         $data = $this->client->addSSLOrder($params);
+
+
 
         $this->assertStringContainsString('success', $data->status);
     }

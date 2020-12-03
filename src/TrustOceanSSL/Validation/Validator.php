@@ -112,6 +112,10 @@ class Validator
             $this->messages[] = "您输入的 $attribute 内容格式不正确";
         } else {
             $msg = str_replace(':attribute', $attribute, $this->customMessages[$rule]);
+            foreach ($params as $key => $param) {
+                $msg = str_replace(':param' . $key, $param, $msg);
+            }
+
             $this->messages[] = $msg;
         }
     }

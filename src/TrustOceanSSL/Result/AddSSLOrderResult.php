@@ -4,6 +4,8 @@
 namespace TrustOceanSSL\Result;
 
 
+use TrustOceanSSL\Model\DcvInfoDomain;
+
 class AddSSLOrderResult extends Result
 {
     public $vendor_id;
@@ -25,4 +27,9 @@ class AddSSLOrderResult extends Result
     public $domains;
 
     public $dcv_info;
+
+    public function getDcvInfoDomain($domain)
+    {
+        return new DcvInfoDomain($this->dcv_info[$domain]);
+    }
 }

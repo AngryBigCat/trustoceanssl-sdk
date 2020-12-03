@@ -85,7 +85,7 @@ trait ValidatesAttributes
         $domains = explode(',', $value);
 
         foreach ($domains as $domain) {
-            if (!$this->checkDomain($domain)) {
+            if (!$this->validateDomain($attribute, $domain)) {
                 return false;
             }
         }
@@ -93,23 +93,11 @@ trait ValidatesAttributes
         return true;
     }
 
-    protected function validateDomain($attribute, $value)
+    protected function validateDomain($attribute, $domain)
     {
-        return $this->checkDomain($value);
-    }
-
-    private function checkDomain($domain)
-    {
-        if (!filter_var($domain, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-            return false;
-        }
-
         $domain = new Domain($domain);
-        if (!$domain->isResolvable() || !$domain->isKnown() || !$domain->isICANN() || $domain->isPrivate()) {
-            return false;
-        }
 
-        return true;
+        return $domain->isResolvable();
     }
 
     protected function validateCheckCsrCode($attribute, $value)
@@ -123,8 +111,14 @@ trait ValidatesAttributes
     {
         $dcvMethods = explode(',', $value);
         foreach ($dcvMethods as $dcvMethod) {
-            if (!in_array($dcvMethod, ['dns', 'http', 'https']) || !$this->validateEmail($attribute, $dcvMethod)) {
-                return false;
+            if (strpos($value, '@') === false) {
+                if (!in_array($dcvMethod, ['dns', 'http', 'https'])) {
+                    return false;
+                }
+            } else {
+                if (!$this->validateEmail($attribute, $dcvMethod)) {
+                    return false;
+                }
             }
         }
 
@@ -158,9 +152,9 @@ trait ValidatesAttributes
         }
 
         if (is_string($value)) {
-            return strlen($value) >= $params[0];
+            return strlen($value) <= $params[0];
         } else if (is_array($value)) {
-            return count($value) >= $params[0];
+            return count($value) <= $params[0];
         }
 
         return true;

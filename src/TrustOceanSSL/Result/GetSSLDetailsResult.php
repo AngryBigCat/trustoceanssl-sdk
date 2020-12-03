@@ -3,6 +3,8 @@
 
 namespace TrustOceanSSL\Result;
 
+use TrustOceanSSL\Model\DcvInfoDomain;
+
 class GetSSLDetailsResult extends Result
 {
 

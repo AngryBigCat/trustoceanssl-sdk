@@ -51,6 +51,7 @@ class Request
             'email' => '您输入的 :attribute Email地址不正确',
             'string' => '您输入的 :attribute 必须为字符串类型',
             'checkDcvMethod' => '您输入的 :attribute 域名验证方式格式不正确',
+            'max' => '您输入的 :attribute 内容长度不能超过 :param1',
         ];
     }
 
