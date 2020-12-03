@@ -9,7 +9,7 @@ class CheckUniqueIdRequest extends Request
     protected function rules()
     {
         return [
-            'unique_id' => 'required|checkUniqueId',
+            'unique_id' => 'required|string',
         ];
     }
 }

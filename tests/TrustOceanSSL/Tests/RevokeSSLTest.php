@@ -8,10 +8,13 @@ class RevokeSSLTest extends TestCase
 {
     public function testRevokeSSL()
     {
-        $params = ['trustocean_id' => 159417,'revocationReason'=>'test'];
+        $params = [
+            'trustocean_id' => $this->order->trustocean_id,
+            'revocationReason' => 'test'
+        ];
 
         $data = $this->client->revokeSSL($params);
 
-        $this->assertStringContainsString('success', $data->status);
+        $this->assertStringContainsString('This order cnanot be revoked, because this order is not in Issued_Active status.', $data->message);
     }
 }

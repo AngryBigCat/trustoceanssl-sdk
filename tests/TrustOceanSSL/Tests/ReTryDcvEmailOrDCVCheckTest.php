@@ -8,7 +8,7 @@ class ReTryDcvEmailOrDCVCheckTest extends TestCase
 {
     public function testReTryDcvEmailOrDCVCheck()
     {
-        $params = ['trustocean_id' => 159417];
+        $params = ['trustocean_id' => $this->order->trustocean_id];
 
         $data = $this->client->reTryDcvEmailOrDCVCheck($params);
 

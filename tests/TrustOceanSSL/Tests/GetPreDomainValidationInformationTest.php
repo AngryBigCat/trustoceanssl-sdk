@@ -9,7 +9,7 @@ class GetPreDomainValidationInformationTest extends TestCase
     public function testGetPreDomainValidationInformation()
     {
         $parmams = [
-            'domains'=> 'xays.top',
+            'domains'=> 'a.nskong.top',
             'csr_code'=>'-----BEGIN CERTIFICATE REQUEST-----
 MIIChTCCAW0CAQAwQDELMAkGA1UEBhMCQ04xDzANBgNVBAgTBnNoYW54aTENMAsG
 A1UEBxMEeGlhbjERMA8GA1UEAxMIeGF5cy50b3AwggEiMA0GCSqGSIb3DQEBAQUA
@@ -27,7 +27,7 @@ VxmUto00ncawVqD21zh1evUTrDmKMKwvXihk/RYDDl7ucRvPakZdlpt9FVaJfn8T
 m9cSbcoFL2pZj8X03zSt/cEa8ljkbmxp+Q==
 -----END CERTIFICATE REQUEST-----
 ',
-            'unique_id'=>'sadasda554asds5a'
+            'unique_id'=>'un32'.substr(time(), -6)
         ];
         $data = $this->client->getPreDomainValidationInformation($parmams);
 

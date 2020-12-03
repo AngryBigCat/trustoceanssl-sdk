@@ -9,7 +9,7 @@ class ReissueSSLOrderTest extends TestCase
     public function testReissueSSLOrder()
     {
         $params = [
-            'trustocean_id' => 159417,
+            'trustocean_id' => $this->order->trustocean_id,
             'csr_code'=>
                 '-----BEGIN CERTIFICATE REQUEST-----
 MIICijCCAXICAQAwRTELMAkGA1UEBhMCQ04xDzANBgNVBAgTBnNoYW54aTENMAsG
@@ -28,14 +28,15 @@ AOBHtbxyVA9WSE+5ECBt6tVRwAhiMugaK2OtYfXL+HJkdzCzVjVSXKA41d+mSQLE
 oVSzfI+5yPg+18jyESwO4bVZ5WpJF436zKgY740o
 -----END CERTIFICATE REQUEST-----
 ',
-            'contact_email'=>'1342479179@qq.com',
-            'dcv_method' => 'https',
+            'contact_email'=>'angrycat123@qq.com',
+            'dcv_method' => 'https,https,https',
             'unique_id'  => 'un32'.substr(md5(time()),0,6),
-            'domains'    => 'test.xays.top'
-            ];
+            'domains'    => 'd.nskong.com,e.nskong.com,f.nskong.com'
+        ];
 
         $data = $this->client->reissueSSLOrder($params);
 
-        $this->assertStringContainsString('success', $data->status);
+        $this->assertStringContainsString('Cannot reissue this order now, your order not in Issued_Active status', $data->message);
+
     }
 }

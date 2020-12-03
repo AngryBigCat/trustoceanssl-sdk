@@ -10,7 +10,7 @@ class CheckUniqueIdTest extends TestCase
 
     public function testCheckUniqueId()
     {
-        $params = ['unique_id' => 'un32ms0902'];
+        $params = ['unique_id' => 'un32'.substr(time(), -6)];
 
         $data = $this->client->checkUniqueId($params);
 

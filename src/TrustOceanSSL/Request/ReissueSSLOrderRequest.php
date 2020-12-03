@@ -14,7 +14,7 @@ class ReissueSSLOrderRequest extends Request
             'dcv_method' => 'required|checkDcvMethod',
             'csr_code' => 'required|checkCsrCode',
             'contact_email' => 'required|email',
-            'unique_id' => 'required|checkUniqueId',
+            'unique_id' => 'required|string',
         ];
     }
 }

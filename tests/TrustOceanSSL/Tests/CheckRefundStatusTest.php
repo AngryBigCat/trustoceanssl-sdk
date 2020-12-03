@@ -10,11 +10,10 @@ class CheckRefundStatusTest extends TestCase
 
     public function testCheckRefundStatus()
     {
-        $params = ['trustocean_id' => 159417];
+        $params = ['trustocean_id' => $this->order->trustocean_id];
 
         $data = $this->client->checkRefundStatus($params);
 
-//        var_dump($data);die();
-        $this->assertStringContainsString('success', $data->status);
+        $this->assertStringContainsString('Order not in refund status.', $data->message);
     }
 }

@@ -10,7 +10,10 @@ class RemoveSanDomainTest extends TestCase
     {
         //暂时无法测试（"无法删除 www.xays.top 每个证书至少保留1条域名.）
 
-        $params = ['trustocean_id' => 159417,'domain'=>'www.xays.top'];
+        $params = [
+            'trustocean_id' => $this->order->trustocean_id,
+            'domain'=>'a.nskong.com'
+        ];
 
         $data = $this->client->removeSanDomain($params);
 

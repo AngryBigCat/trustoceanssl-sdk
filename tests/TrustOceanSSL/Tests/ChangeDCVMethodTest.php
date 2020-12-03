@@ -10,9 +10,13 @@ class ChangeDCVMethodTest extends TestCase
 
     public function testChangeDCVMethod()
     {
-        $params = ['trustocean_id' => 159417];
+        $params = [
+            'trustocean_id' => $this->order->trustocean_id,
+            'domain' => 'a.nskong.com',
+            'method' => 'http',
+        ];
 
-        $data = $this->client->reTryDcvEmailOrDCVCheck($params);
+        $data = $this->client->changeDCVMethod($params);
 
         $this->assertStringContainsString('success', $data->status);
     }

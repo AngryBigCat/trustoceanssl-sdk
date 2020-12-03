@@ -10,7 +10,7 @@ class CancelAndRefundTest extends TestCase
 
     public function testCancelAndRefund()
     {
-        $params = ['trustocean_id' => 159417];
+        $params = ['trustocean_id' => $this->order->trustocean_id];
 
         $data = $this->client->cancelAndRefund($params);
 

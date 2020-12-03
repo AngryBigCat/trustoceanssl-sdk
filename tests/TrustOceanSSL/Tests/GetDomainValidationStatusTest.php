@@ -8,7 +8,7 @@ class GetDomainValidationStatusTest extends TestCase
 {
     public function testGetDomainValidationStatus()
     {
-        $params = ['trustocean_id' => 159417];
+        $params = ['trustocean_id' => $this->order->trustocean_id];
 
         $data = $this->client->getDomainValidationStatus($params);
 
