@@ -4,6 +4,14 @@
 namespace TrustOceanSSL\Request;
 
 
+/**
+ * Class GetPreDomainValidationInformationRequest
+ * @package TrustOceanSSL\Request
+ *
+ * @property array $domains
+ * @property string $csr_code
+ * @property string $unique_id
+ */
 class GetPreDomainValidationInformationRequest extends Request
 {
     protected function rules()

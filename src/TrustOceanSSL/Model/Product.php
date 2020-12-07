@@ -14,7 +14,7 @@ class Product extends Model
 
     public $class;
 
-    public $multiDomain;
+    public $multidomain;
 
     public $wildcard;
 

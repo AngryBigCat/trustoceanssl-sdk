@@ -4,6 +4,7 @@
 namespace TrustOceanSSL\Validation;
 
 
+use TrustOceanSSL\Support\Str;
 use TrustOceanSSL\Validation\Concerns\ValidatesAttributes;
 
 class Validator
@@ -70,7 +71,7 @@ class Validator
 
     protected function validateAttribute($attribute, $rule)
     {
-        [$rule, $params] = $this->parseRule($rule);
+        [$rule, $params] = $this->parseStringRule($rule);
         if ($rule === '') {
             return;
         }
@@ -85,7 +86,7 @@ class Validator
         }
     }
 
-    protected function parseRule($rules)
+    protected function parseStringRule($rules)
     {
         $params = [];
         if (strpos($rules, ':') !== false) {
@@ -94,7 +95,7 @@ class Validator
             $params = str_getcsv($params);
         }
 
-        return [$rules, $params];
+        return [Str::studly(trim($rules)), $params];
     }
 
     protected function getValue($attribute)
@@ -108,10 +109,10 @@ class Validator
 
     protected function addFailure($attribute, $rule, $params)
     {
-        if (!isset($this->customMessages[$rule])) {
-            $this->messages[] = "您输入的 $attribute 内容格式不正确";
+        if (!isset($this->customMessages[Str::snake($rule)])) {
+            $this->messages[] = "您输入的 $attribute 内容格式不正确, $rule";
         } else {
-            $msg = str_replace(':attribute', $attribute, $this->customMessages[$rule]);
+            $msg = str_replace(':attribute', $attribute, $this->customMessages[Str::snake($rule)]);
             foreach ($params as $key => $param) {
                 $msg = str_replace(":param{$key}", $param, $msg);
             }

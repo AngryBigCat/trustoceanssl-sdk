@@ -4,12 +4,24 @@
 namespace TrustOceanSSL\Model\Concerns;
 
 
+use TrustOceanSSL\Support\Str;
+
 trait HasAttributes
 {
     protected function fill($attributes)
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
+        }
+    }
+
+    protected function parse($attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            $method = 'parse' . Str::studly($key);
+            if (method_exists($this, $method)) {
+                call_user_func([$this, $method], $value);
+            }
         }
     }
 

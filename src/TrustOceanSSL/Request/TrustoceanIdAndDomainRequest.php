@@ -4,8 +4,13 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
+/**
+ * Class TrustoceanIdAndDomainRequest
+ * @package TrustOceanSSL\Request
+ *
+ * @property int $trustocean_id
+ * @property string $domain
+ */
 class TrustoceanIdAndDomainRequest extends Request
 {
     protected function rules()

@@ -4,8 +4,14 @@
 namespace TrustOceanSSL\Request;
 
 
-use TrustOceanSSL\Exception\TrustOceanRequestException;
-
+/**
+ * Class ChangeDCVMethodRequest
+ * @package TrustOceanSSL\Request
+ *
+ * @property int $trustocean_id
+ * @property string $domain
+ * @property string $method
+ */
 class ChangeDCVMethodRequest extends Request
 {
     protected function rules()

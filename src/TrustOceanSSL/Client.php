@@ -27,6 +27,7 @@ use TrustOceanSSL\Request\Request;
  * @method \TrustOceanSSL\Result\CheckUniqueIdResult                        checkUniqueId(array|Request $params)
  * @method \TrustOceanSSL\Result\GetProductPriceListResult                  getProductPriceList()
  * @method \TrustOceanSSL\Result\GetProductListWithPricingResult            getProductListWithPricing()
+ * @method \TrustOceanSSL\Result\CreateNewUniqueIdResult                    createNewUniqueId()
  */
 class Client
 {

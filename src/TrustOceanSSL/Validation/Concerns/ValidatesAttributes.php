@@ -80,9 +80,11 @@ trait ValidatesAttributes
         return (new EmailValidator)->isValid($value, new MultipleValidationWithAnd([new RFCValidation()]));
     }
 
-    protected function validateDomains($attribute, $value)
+    protected function validateDomains($attribute, $domains)
     {
-        $domains = explode(',', $value);
+        if (!is_array($domains)) {
+            return false;
+        }
 
         foreach ($domains as $domain) {
             if (!$this->validateDomain($attribute, $domain)) {
@@ -93,10 +95,10 @@ trait ValidatesAttributes
         return true;
     }
 
-    protected function validateNoRepeat($attribute, $value)
+    protected function validateDistinct($attribute, $domains)
     {
-        $domains = explode(',', $value);
-        if (count($domains) !== count(array_unique($domains))) {
+        $distinctDomains = array_values(array_unique($domains));
+        if (count($domains) !== count($distinctDomains)) {
             return false;
         }
 
@@ -105,6 +107,10 @@ trait ValidatesAttributes
 
     protected function validateDomain($attribute, $domain)
     {
+        if (filter_var($domain, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            return false;
+        }
+
         $domain = new Domain($domain);
 
         // 检查是否为IDN域名
@@ -112,21 +118,38 @@ trait ValidatesAttributes
             return false;
         }
 
+        // 域名不能包含有大写字母
+        if (preg_match('/[A-Z]/', $domain->getContent())) {
+            return false;
+        }
+
+        // 域名长度不能大于63位
+        if (strlen($domain->getContent()) > 63) {
+            return false;
+        }
+
         return $domain->isResolvable();
     }
 
-    protected function validateCheckCsrCode($attribute, $value)
+    protected function validateCsr($attribute, $value)
     {
-        $csrData = openssl_csr_get_public_key($value);
+        $csrData = openssl_csr_get_subject($value);
+
+        if (!isset($csrData['CN']) || filter_var($csrData['CN'], FILTER_VALIDATE_IP)) {
+            return false;
+        }
 
         return !is_null($csrData);
     }
 
-    protected function validateCheckDcvMethod($attribute, $value)
+    protected function validateDcvMethods($attribute, $dcvMethods)
     {
-        $dcvMethods = explode(',', $value);
+        if (!is_array($dcvMethods)) {
+            return false;
+        }
+
         foreach ($dcvMethods as $dcvMethod) {
-            if (strpos($value, '@') === false) {
+            if (strpos($dcvMethod, '@') === false) {
                 if (!in_array($dcvMethod, ['dns', 'http', 'https'])) {
                     return false;
                 }
@@ -140,30 +163,30 @@ trait ValidatesAttributes
         return true;
     }
 
-    protected function validateCheckEqualLength($attribute, $value, $params)
+    protected function validateSize($attribute, $value, $parameters)
     {
-        if (!isset($params[0])) {
-            return false;
-        }
+        $this->requireParameterCount(1, $parameters, 'size');
 
-        $dcvMethodName = $params[0];
-        if (!array_key_exists($dcvMethodName, $this->data)) {
-            return false;
-        }
+        if (!is_numeric($parameters[0]) && is_string($parameters[0])) {
+            $targetName = $parameters[0];
+            if (!array_key_exists($targetName, $this->data)) {
+                return false;
+            }
 
-        $dcvMethods = explode(',', $this->data[$dcvMethodName]);
-        $domains = explode(',', $value);
-        if (count($dcvMethods) !== count($domains)) {
-            return false;
-        }
+            if (gettype($this->data[$targetName]) !== gettype($value)) {
+                return false;
+            }
 
-        foreach ($dcvMethods as $key => $method) {
-            if (filter_var($domains[0], FILTER_VALIDATE_IP | FILTER_FLAG_IPV4) && !in_array($method, ['http', 'https'])) { // IP类型域名，只能使用http、https验证方式
+            if (is_array($value)) {
+                return count($this->data[$targetName]) === count($value);
+            } elseif (is_string($value)) {
+                return strlen($this->data[$targetName]) === strlen($value);
+            } else {
                 return false;
             }
         }
 
-        return true;
+        return false;
     }
 
     protected function validateMax($attribute, $value, $params)
@@ -210,5 +233,63 @@ trait ValidatesAttributes
         }
 
         return true;
+    }
+
+    protected function validateDate($attribute, $value)
+    {
+        if ($value instanceof \DateTimeInterface) {
+            return true;
+        }
+
+        if ((! is_string($value) && ! is_numeric($value)) || strtotime($value) === false) {
+            return false;
+        }
+
+        $date = date_parse($value);
+
+        return checkdate($date['month'], $date['day'], $date['year']);
+    }
+
+    protected function validateDateFormat($attribute, $value, $parameters)
+    {
+        $this->requireParameterCount(1, $parameters, 'date_format');
+
+        if (! is_string($value) && ! is_numeric($value)) {
+            return false;
+        }
+
+        $format = $parameters[0];
+
+        $date = \DateTime::createFromFormat('!'.$format, $value);
+
+        return $date && $date->format($format) == $value;
+    }
+
+    public function requireParameterCount($count, $parameters, $rule)
+    {
+        if (count($parameters) < $count) {
+            throw new \InvalidArgumentException("Validation rule $rule requires at least $count parameters.");
+        }
+    }
+
+    /**
+     * Validate that an attribute is an array.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @param  array  $parameters
+     * @return bool
+     */
+    public function validateArray($attribute, $value, $parameters = [])
+    {
+        if (!is_array($value)) {
+            return false;
+        }
+
+        if (empty($parameters)) {
+            return true;
+        }
+
+        return empty(array_diff_key($value, array_fill_keys($parameters, '')));
     }
 }
