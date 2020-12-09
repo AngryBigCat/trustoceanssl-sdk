@@ -38,7 +38,7 @@ class GetSSLDetailsResult extends Result
 
     public $dcv_info;
 
-    public function getDcvInfoDomain($domain)
+    public function getDcvInfoByDomain($domain)
     {
         return new DcvInfoDomain($domain);
     }

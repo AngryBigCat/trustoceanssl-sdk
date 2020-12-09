@@ -28,7 +28,7 @@ class AddSSLOrderResult extends Result
 
     public $dcv_info;
 
-    public function getDcvInfoDomain($domain)
+    public function getDcvInfoByDomain($domain)
     {
         return new DcvInfoDomain($this->dcv_info[$domain]);
     }
