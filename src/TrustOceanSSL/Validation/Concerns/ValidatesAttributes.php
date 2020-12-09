@@ -149,14 +149,23 @@ trait ValidatesAttributes
         }
 
         foreach ($dcvMethods as $dcvMethod) {
-            if (strpos($dcvMethod, '@') === false) {
-                if (!in_array($dcvMethod, ['dns', 'http', 'https'])) {
-                    return false;
-                }
-            } else {
-                if (!$this->validateEmail($attribute, $dcvMethod)) {
-                    return false;
-                }
+            if (!$this->validateDcvMethod($attribute, $dcvMethod)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    protected function validateDcvMethod($attribute, $dcvMethod)
+    {
+        if (strpos($dcvMethod, '@') === false) {
+            if (!in_array($dcvMethod, ['dns', 'http', 'https'])) {
+                return false;
+            }
+        } else {
+            if (!$this->validateEmail($attribute, $dcvMethod)) {
+                return false;
             }
         }
 

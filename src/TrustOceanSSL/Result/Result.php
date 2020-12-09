@@ -20,6 +20,8 @@ class Result
     {
         $this->fill($attributes);
 
+        $this->parse($attributes);
+
         $this->validate();
     }
 

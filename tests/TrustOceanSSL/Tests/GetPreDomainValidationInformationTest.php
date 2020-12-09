@@ -9,7 +9,9 @@ class GetPreDomainValidationInformationTest extends TestCase
     public function testGetPreDomainValidationInformation()
     {
         $parmams = [
-            'domains'=> 'a.nskong.top',
+            'domains'=> [
+                'a.nskong.com',
+            ],
             'csr_code'=>'-----BEGIN CERTIFICATE REQUEST-----
 MIIChTCCAW0CAQAwQDELMAkGA1UEBhMCQ04xDzANBgNVBAgTBnNoYW54aTENMAsG
 A1UEBxMEeGlhbjERMA8GA1UEAxMIeGF5cy50b3AwggEiMA0GCSqGSIb3DQEBAQUA

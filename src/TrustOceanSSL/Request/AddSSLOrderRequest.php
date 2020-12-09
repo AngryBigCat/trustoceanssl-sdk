@@ -63,11 +63,11 @@ class AddSSLOrderRequest extends Request
 
     public function parseDomains($value)
     {
-        $this->domains = implode(',', $value);
+        return implode(',', $value);
     }
 
     public function parseDcvMethod($value)
     {
-        $this->dcv_method = implode(',', $value);
+        return implode(',', $value);
     }
 }

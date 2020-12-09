@@ -9,7 +9,7 @@ class RevokeSSLTest extends TestCase
     public function testRevokeSSL()
     {
         $params = [
-            'trustocean_id' => $this->order->trustocean_id,
+            'trustocean_id' => $this->trustocean_id,
             'revocationReason' => 'test'
         ];
 

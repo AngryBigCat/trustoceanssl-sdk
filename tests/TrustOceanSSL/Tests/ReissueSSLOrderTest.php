@@ -9,7 +9,7 @@ class ReissueSSLOrderTest extends TestCase
     public function testReissueSSLOrder()
     {
         $params = [
-            'trustocean_id' => $this->order->trustocean_id,
+            'trustocean_id' => $this->trustocean_id,
             'csr_code'=>
                 '-----BEGIN CERTIFICATE REQUEST-----
 MIICijCCAXICAQAwRTELMAkGA1UEBhMCQ04xDzANBgNVBAgTBnNoYW54aTENMAsG
@@ -29,9 +29,17 @@ oVSzfI+5yPg+18jyESwO4bVZ5WpJF436zKgY740o
 -----END CERTIFICATE REQUEST-----
 ',
             'contact_email'=>'angrycat123@qq.com',
-            'dcv_method' => 'https,https,https',
+            'dcv_method' => [
+                'https',
+                'https',
+                'https',
+            ],
             'unique_id'  => 'un32'.substr(md5(time()),0,6),
-            'domains'    => 'd.nskong.com,e.nskong.com,f.nskong.com'
+            'domains'    => [
+                'd.nskong.com',
+                'e.nskong.com',
+                'f.nskong.com',
+            ]
         ];
 
         $data = $this->client->reissueSSLOrder($params);

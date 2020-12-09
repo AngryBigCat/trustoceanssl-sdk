@@ -20,7 +20,6 @@ class GetProductListResult extends Result
         foreach ($this->products as $product) {
             $products[] = new Product($product);
         }
-
-        $this->products = $products;
+        return $products;
     }
 }

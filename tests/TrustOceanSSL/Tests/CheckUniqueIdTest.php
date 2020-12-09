@@ -6,8 +6,6 @@ namespace TrustOceanSSL\Tests;
 
 class CheckUniqueIdTest extends TestCase
 {
-    public $products;
-
     public function testCheckUniqueId()
     {
         $params = ['unique_id' => 'un32'.substr(time(), -6)];

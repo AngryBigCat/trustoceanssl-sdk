@@ -8,7 +8,7 @@ class GetSSLDetailsTest extends TestCase
 {
     public function testGetSSLDetails()
     {
-        $params = ['trustocean_id' => $this->order->trustocean_id];
+        $params = ['trustocean_id' => $this->trustocean_id];
 
         $data = $this->client->getSSLDetails($params);
 

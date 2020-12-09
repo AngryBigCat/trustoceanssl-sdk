@@ -18,8 +18,13 @@ class GetPreDomainValidationInformationRequest extends Request
     {
         return [
             'domains' => 'required|domains',
-            'csr_code' => 'required|checkCsrCode',
+            'csr_code' => 'required|csr',
             'unique_id' => 'required|string|between:8,15',
         ];
+    }
+
+    protected function parseDomains()
+    {
+        return implode(',', $this->domains);
     }
 }

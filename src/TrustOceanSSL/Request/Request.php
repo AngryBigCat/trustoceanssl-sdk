@@ -52,13 +52,14 @@ class Request
             'domain' => '您输入的 :attribute 字段值域名格式不正确',
             'email' => '您输入的 :attribute 字段值Email地址不正确',
             'string' => '您输入的 :attribute 字段值必须为字符串类型',
-            'dcv_methods' => '您输入的 :attribute 字段值格式不正确',
+            'dcv_methods' => '您输入的 :attribute 字段值DCV组验证格式不正确',
             'max' => '您输入的 :attribute 字段值长度不能超过 :param0 位',
             'min' => '您输入的 :attribute 字段值长度不能小于 :param0 位',
             'distinct' => '您输入的 :attribute 字段值内容不能重复',
             'size' => '您输入的 :attribute 字段值长度必须等于 :param0 字段值的长度',
             'between' => '您输入的 :attribute 字段值长度必须介于 :param0 到 :param1 位之间',
             'array' => '您输入的 :attribute 字段值必须是数组类型',
+            'dcv_method' => '您输入的 :attribute 字段值DCV验证格式不正确',
         ];
     }
 

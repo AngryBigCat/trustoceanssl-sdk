@@ -8,7 +8,7 @@ class GetOrderStatusTest extends TestCase
 {
     public function testGetOrderStatus()
     {
-        $params = ['trustocean_id' => $this->order->trustocean_id];
+        $params = ['trustocean_id' => $this->trustocean_id];
 
         $data = $this->client->getOrderStatus($params);
 

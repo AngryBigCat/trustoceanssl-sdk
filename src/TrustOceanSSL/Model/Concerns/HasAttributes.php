@@ -20,7 +20,9 @@ trait HasAttributes
         foreach ($attributes as $key => $value) {
             $method = 'parse' . Str::studly($key);
             if (method_exists($this, $method)) {
-                call_user_func([$this, $method], $value);
+                $result = call_user_func([$this, $method], $value);
+
+                $this->setAttribute($key, $result);
             }
         }
     }
