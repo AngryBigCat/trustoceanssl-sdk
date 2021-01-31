@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b18e3f97b88170306923e695c126e291",
+    "content-hash": "24e0081f4cecdfe7466f435f6f7587f8",
     "packages": [
         {
             "name": "doctrine/lexer",
@@ -83,36 +83,35 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "3.x-dev",
+            "version": "2.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "de0fb24141e7d56cdab9ade5a9b3122798bbfd63"
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/de0fb24141e7d56cdab9ade5a9b3122798bbfd63",
-                "reference": "de0fb24141e7d56cdab9ade5a9b3122798bbfd63",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4",
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4",
                 "shasum": ""
             },
             "require": {
-                "doctrine/lexer": "^1.2",
-                "php": ">=7.2",
-                "symfony/polyfill-intl-idn": "^1.15"
+                "doctrine/lexer": "^1.0.1",
+                "php": ">=5.5",
+                "symfony/polyfill-intl-idn": "^1.10"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^8.5.8|^9.3.3",
-                "vimeo/psalm": "^4"
+                "dominicsayers/isemail": "^3.0.7",
+                "phpunit/phpunit": "^4.8.36|^7.5.15",
+                "satooshi/php-coveralls": "^1.0.1"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -140,7 +139,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/3.x"
+                "source": "https://github.com/egulias/EmailValidator/tree/2.1.25"
             },
             "funding": [
                 {
@@ -148,7 +147,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-27T16:48:19+00:00"
+            "time": "2020-12-29T14:50:06+00:00"
         },
         {
             "name": "jeremykendall/php-domain-parser",
@@ -2383,8 +2382,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jeremykendall/php-domain-parser": 20,
-        "egulias/email-validator": 20
+        "jeremykendall/php-domain-parser": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
