@@ -30,5 +30,5 @@
             "TrustOceanSSL\\Tests\\": "tests/TrustOceanSSL/Tests/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
 }
