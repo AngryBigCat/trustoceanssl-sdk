@@ -15,7 +15,8 @@
         "ext-openssl": "*",
         "ext-mbstring": "*",
         "jeremykendall/php-domain-parser": "5.x-dev",
-        "egulias/email-validator": "2.1.x-dev"
+        "egulias/email-validator": "2.1.x-dev",
+        "acmephp/ssl": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5"
