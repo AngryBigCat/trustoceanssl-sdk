@@ -1,13 +1,13 @@
 <?php
 
-
 namespace TrustOceanSSL\Validation\Concerns;
-
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
-use Pdp\Domain;
+use TrustOceanSSL\Support\Domain;
+
+// use Pdp\Domain;
 
 trait ValidatesAttributes
 {
@@ -111,24 +111,24 @@ trait ValidatesAttributes
             return false;
         }
 
-        $domain = new Domain($domain);
+        $result = Domain::parse($domain);
 
         // 检查是否为IDN域名
-        if ($domain->toAscii()->getContent() !== $domain->getContent()) {
+        if ($result->toAscii()->toString() !== $result->domain()->toString()) {
             return false;
         }
 
         // 域名不能包含有大写字母
-        if (preg_match('/[A-Z]/', $domain->getContent())) {
+        if (preg_match('/[A-Z]/', $result->domain()->toString())) {
             return false;
         }
 
         // 域名长度不能大于63位
-        if (strlen($domain->getContent()) > 63) {
+        if (strlen($result->domain()->toString()) > 63) {
             return false;
         }
 
-        return $domain->isResolvable();
+        return $result->suffix()->isKnown();
     }
 
     protected function validateCsr($attribute, $value)
