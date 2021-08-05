@@ -14,7 +14,7 @@
         "ext-curl": "*",
         "ext-openssl": "*",
         "ext-mbstring": "*",
-        "jeremykendall/php-domain-parser": "5.x-dev",
+        "jeremykendall/php-domain-parser": "^6.1",
         "egulias/email-validator": "2.1.x-dev"
     },
     "require-dev": {
